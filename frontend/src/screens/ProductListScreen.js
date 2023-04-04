@@ -70,29 +70,18 @@ const ProductListScreen = ({ history, match }) => {
     dispatch(createProduct())
   }
 
-  return (
-    <>
-      <Row className='align-items-center'>
-        <Col>
-          <h1>Products</h1>
-        </Col>
-        <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
-          </Button>
-        </Col>
-      </Row>
-      {loadingDelete && <Loader />}
-      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-      {loadingCreate && <Loader />}
-      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <>
-          <Table striped bordered hover responsive className='table-sm'>
+  const renderContent = () => {
+    if (loading) {
+      return <Loader />;
+    }
+  
+    if (error) {
+      return <Message variant='danger'>{error}</Message>;
+    }
+
+    return (
+      <>
+      <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
                 <th>ID</th>
@@ -130,8 +119,28 @@ const ProductListScreen = ({ history, match }) => {
             </tbody>
           </Table>
           <Paginate pages={pages} page={page} isAdmin={true} />
-        </>
-      )}
+       
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Row className='align-items-center'>
+        <Col>
+          <h1>Products</h1>
+        </Col>
+        <Col className='text-right'>
+          <Button className='my-3' onClick={createProductHandler}>
+            <i className='fas fa-plus'></i> Create Product
+          </Button>
+        </Col>
+      </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+      {renderContent()}
     </>
   )
 }
