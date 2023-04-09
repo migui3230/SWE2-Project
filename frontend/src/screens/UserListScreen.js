@@ -31,16 +31,15 @@ const UserListScreen = ({ history }) => {
       dispatch(deleteUser(id))
     }
   }
-
-  return (
-    <>
-      <h1>Users</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
-        <Table striped bordered hover responsive className='table-sm'>
+  if (loading){
+    return (<Loader />);
+  }
+  else {
+    if (error){
+      return (<Message variant='danger'>{error}</Message>);
+    }
+    else {
+        return (<Table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
               <th>ID</th>
@@ -82,10 +81,9 @@ const UserListScreen = ({ history }) => {
               </tr>
             ))}
           </tbody>
-        </Table>
-      )}
-    </>
-  )
+        </Table>);
+    }
+  }
 }
 
 export default UserListScreen
