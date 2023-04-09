@@ -23,14 +23,13 @@ const OrderListScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo])
 
-  return (
-    <>
-      <h1>Orders</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
+  const renderLoadingOrTable = () => {
+    if (loading) {
+      return <Loader />
+    } else if (error) {
+      return <Message variant='danger'>{error}</Message>
+    } else {
+      return (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
             <tr>
@@ -75,7 +74,14 @@ const OrderListScreen = ({ history }) => {
             ))}
           </tbody>
         </Table>
-      )}
+      )
+    }
+  }
+
+  return (
+    <>
+      <h1>Orders</h1>
+      {renderLoadingOrTable()}
     </>
   )
 }
