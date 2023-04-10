@@ -57,17 +57,32 @@ const ProductScreen = ({ history, match }) => {
     )
   }
 
-  return (
-    <>
-      <Link className='btn btn-light my-3' to='/'>
-        Go Back
-      </Link>
-      {loading ? (
+  if (loading){
+    return (
+      <>
+        <Link className='btn btn-light my-3' to='/'>
+          Go Back
+        </Link>
         <Loader />
-      ) : error ? (
-        <Message variant='danger'>{error}</Message>
-      ) : (
+      </>)
+  }
+  
+  else {
+      if (error){
+        return (
+          <>
+            <Link className='btn btn-light my-3' to='/'>
+              Go Back
+            </Link>
+            <Message variant='danger'>{error}</Message>
+          </>
+        )}
+      else {
+        return (
         <>
+          <Link className='btn btn-light my-3' to='/'>
+            Go Back
+          </Link>
           <Meta title={product.name} />
           <Row>
             <Col md={6}>
@@ -215,10 +230,9 @@ const ProductScreen = ({ history, match }) => {
               </ListGroup>
             </Col>
           </Row>
-        </>
-      )}
-    </>
-  )
+        </>)
+      }
+  }
 }
 
 export default ProductScreen
