@@ -28,7 +28,7 @@ const Rating = ({ value, text, color }) => {
       <span>
         <i style={{ color }} className={setClassName(5, 4.5)}></i>
       </span>
-      <span>{text && text}</span>
+      {text ? <span>{text}</span> : null}
     </div>
   );
 };
