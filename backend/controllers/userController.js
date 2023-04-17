@@ -167,6 +167,16 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+/**
+
+Sends an email using the SendGrid API
+
+@param {object} req - The request object from Express.js
+
+@param {object} res - The response object from Express.js
+
+@returns {Promise<void>}
+*/
 const sendEmail = asyncHandler(async (req, res) => {
   try {
     const { email, subject, message } = req.body;

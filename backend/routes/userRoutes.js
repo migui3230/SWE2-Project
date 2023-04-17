@@ -25,6 +25,7 @@ router
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
 
+// route for sending emails from contact form
 router.route("/send-email").post(sendEmail);
 
 export default router;

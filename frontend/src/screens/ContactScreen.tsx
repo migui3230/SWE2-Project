@@ -14,6 +14,7 @@ import React from "react";
 import { useForm } from "@mantine/form";
 import axios from "axios";
 
+// styles for the page
 const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: 400,
@@ -87,6 +88,7 @@ type FormValues = {
 const ContactScreen = () => {
   const { classes } = useStyles();
 
+  // Send email function
   const sendEmail = async ({ email, subject, message }: FormValues) => {
     try {
       const response = await axios.post("/api/users/send-email", {
@@ -102,6 +104,7 @@ const ContactScreen = () => {
     }
   };
 
+  // initial form data and validation
   const form = useForm({
     initialValues: {
       email: "",
@@ -118,6 +121,7 @@ const ContactScreen = () => {
     },
   });
 
+  // contact form
   return (
     <div className={classes.wrapper}>
       <SimpleGrid
