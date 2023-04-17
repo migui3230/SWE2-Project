@@ -7,12 +7,12 @@ import {
   Textarea,
   Button,
   Group,
-  Center,
   rem,
   Box,
 } from "@mantine/core";
 import React from "react";
 import { useForm } from "@mantine/form";
+import axios from "axios";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -78,8 +78,29 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+type FormValues = {
+  email: string;
+  subject: string;
+  message: string;
+};
+
 const ContactScreen = () => {
   const { classes } = useStyles();
+
+  const sendEmail = async ({ email, subject, message }: FormValues) => {
+    try {
+      const response = await axios.post("/api/users/send-email", {
+        email: email, // The email value from the form
+        subject: subject, // The subject value from the form
+        message: message, // The message value from the form
+      });
+
+      console.log(response.data); // Log the response
+    } catch (error) {
+      console.error(error);
+      alert("Error sending email");
+    }
+  };
 
   const form = useForm({
     initialValues: {
@@ -112,7 +133,7 @@ const ContactScreen = () => {
         </div>
         <div className={classes.form}>
           <Box maw={300} mx="auto">
-            <form onSubmit={form.onSubmit((values) => console.log(values))}>
+            <form onSubmit={form.onSubmit((values) => sendEmail(values))}>
               <TextInput
                 label="Email"
                 placeholder="your@email.com"
