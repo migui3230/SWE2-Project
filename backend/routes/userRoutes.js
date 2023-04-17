@@ -25,6 +25,6 @@ router
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
 
-router.route("/send-email").post(protect, sendEmail);
+router.route("/send-email").post(sendEmail);
 
 export default router;
