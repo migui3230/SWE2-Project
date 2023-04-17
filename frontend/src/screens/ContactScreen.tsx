@@ -9,8 +9,10 @@ import {
   Group,
   Center,
   rem,
+  Box,
 } from "@mantine/core";
 import React from "react";
+import { useForm } from "@mantine/form";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -79,6 +81,22 @@ const useStyles = createStyles((theme) => ({
 const ContactScreen = () => {
   const { classes } = useStyles();
 
+  const form = useForm({
+    initialValues: {
+      email: "",
+      subject: "",
+      message: "",
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      subject: (value) =>
+        value.trim().length > 0 ? null : "Subject is required",
+      message: (value) =>
+        value.trim().length > 0 ? null : "Message is required",
+    },
+  });
+
   return (
     <div className={classes.wrapper}>
       <SimpleGrid
@@ -93,31 +111,42 @@ const ContactScreen = () => {
           </Text>
         </div>
         <div className={classes.form}>
-          <TextInput
-            label="Email"
-            placeholder="your@email.com"
-            required
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
-          <TextInput
-            label="Subject"
-            placeholder="Example Subject"
-            mt="md"
-            required
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
-          <Textarea
-            required
-            label="Your message"
-            placeholder="I want to order your goods"
-            minRows={4}
-            mt="md"
-            classNames={{ input: classes.input, label: classes.inputLabel }}
-          />
+          <Box maw={300} mx="auto">
+            <form onSubmit={form.onSubmit((values) => console.log(values))}>
+              <TextInput
+                label="Email"
+                placeholder="your@email.com"
+                required
+                classNames={{ input: classes.input, label: classes.inputLabel }}
+                {...form.getInputProps("email")}
+              />
 
-          <Group position="right" mt="md">
-            <Button className={classes.control}>Send message</Button>
-          </Group>
+              <TextInput
+                label="Subject"
+                placeholder="Example Subject"
+                mt="md"
+                required
+                classNames={{ input: classes.input, label: classes.inputLabel }}
+                {...form.getInputProps("subject")}
+              />
+
+              <Textarea
+                required
+                label="Your message"
+                placeholder="I want to order your goods"
+                minRows={4}
+                mt="md"
+                classNames={{ input: classes.input, label: classes.inputLabel }}
+                {...form.getInputProps("message")}
+              />
+
+              <Group position="right" mt="md">
+                <Button className={classes.control} type="submit">
+                  Send message
+                </Button>
+              </Group>
+            </form>
+          </Box>
         </div>
       </SimpleGrid>
     </div>
