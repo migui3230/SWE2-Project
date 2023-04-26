@@ -18,8 +18,35 @@
       crossorigin="anonymous"
     />
     <title>Welcome To ProShop</title>
+    
+    
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : "224899010141228",
+      cookie     : true,
+      xfbml      : true,
+      version    : "v16.0"
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=YOUR_APP_ID&autoLogAppEvents=1" nonce="R8YfLzUw"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
