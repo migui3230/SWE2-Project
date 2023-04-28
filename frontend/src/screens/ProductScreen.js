@@ -152,12 +152,6 @@ const ProductScreen = ({ history, match }) => {
                     >
                       <TwitterIcon size={48}></TwitterIcon>
                     </TwitterShareButton>
-                    <FacebookShareButton
-                      url={window.location.href}
-                      quote={`Check out ${product.name}`}
-                    >
-                      <FacebookIcon size={48}></FacebookIcon>
-                    </FacebookShareButton>
                     <WhatsappShareButton
                       url={window.location.href}
                       quote={`Check out ${product.name}`}
