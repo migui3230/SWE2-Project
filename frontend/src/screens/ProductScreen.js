@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button, Form, ListGroupItem } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
 import {
   listProductDetails,
   createProductReview,
@@ -143,6 +144,30 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <Button
+                      onClick={addToCartHandler}
+                      className='btn-block'
+                      type='button'
+                      disabled={product.countInStock === 0}
+                    >
+                      Share
+                    </Button>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <TwitterShareButton
+                      url={window.location.href}     
+                      quote={`Check out ${product.name}`}
+                    >
+                      <TwitterIcon size={38}></TwitterIcon>
+                    </TwitterShareButton>
+                    <FacebookShareButton
+                      url={window.location.href}
+                      quote={`Check out ${product.name}`}
+                    >
+                      <FacebookIcon size={38}></FacebookIcon>
+                    </FacebookShareButton>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
