@@ -20,6 +20,11 @@ h2 {
   margin: 0.1rem;
 }
 
+.category-filter-btn {
+  border: none;
+  background-color: transparent;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,
