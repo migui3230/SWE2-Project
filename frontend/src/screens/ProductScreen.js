@@ -55,8 +55,8 @@ const ProductScreen = ({ history, match }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
-  const addToSaveForLaterHandler = () => {
-    history.push(`/saveForLater/${match.params.id}?qty=${qty}`);
+  const addTosavedForLaterHandler = () => {
+    history.push(`/savedForLater/${match.params.id}?qty=${qty}`);
   };
 
   const submitHandler = (e) => {
@@ -161,7 +161,7 @@ const ProductScreen = ({ history, match }) => {
                   )}
                   <ListGroup.Item>
                     <Button
-                      onClick={addToSaveForLaterHandler}
+                      onClick={addTosavedForLaterHandler}
                       className='btn-block btn-light'
                       type='button'
                       disabled={product.countInStock === 0}

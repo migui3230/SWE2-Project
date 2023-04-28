@@ -20,7 +20,7 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import ContactScreen from './screens/ContactScreen';
 import SocialLoginScreen from './screens/SocialLoginScreen';
-import SavedForLaterScreen from './screens/SaveForLaterScreen';
+import SavedForLaterScreen from './screens/SavedForLaterScreen';
 
 const App = () => {
   return (
