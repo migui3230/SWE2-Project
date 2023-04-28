@@ -6,7 +6,7 @@ import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
-import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon } from 'react-share'
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappIcon, WhatsappShareButton } from 'react-share'
 import {
   listProductDetails,
   createProductReview,
@@ -146,28 +146,24 @@ const ProductScreen = ({ history, match }) => {
                     </Button>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCartHandler}
-                      className='btn-block'
-                      type='button'
-                      disabled={product.countInStock === 0}
-                    >
-                      Share
-                    </Button>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
                     <TwitterShareButton
                       url={window.location.href}     
                       quote={`Check out ${product.name}`}
                     >
-                      <TwitterIcon size={38}></TwitterIcon>
+                      <TwitterIcon size={48}></TwitterIcon>
                     </TwitterShareButton>
                     <FacebookShareButton
                       url={window.location.href}
                       quote={`Check out ${product.name}`}
                     >
-                      <FacebookIcon size={38}></FacebookIcon>
+                      <FacebookIcon size={48}></FacebookIcon>
                     </FacebookShareButton>
+                    <WhatsappShareButton
+                      url={window.location.href}
+                      quote={`Check out ${product.name}`}
+                    >
+                      <WhatsappIcon size={48}></WhatsappIcon>
+                    </WhatsappShareButton>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
