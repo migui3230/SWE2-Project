@@ -1,84 +1,95 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
-import Rating from '../components/Rating'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import Meta from '../components/Meta'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from 'react-bootstrap';
+import Rating from '../components/Rating';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import {
   listProductDetails,
   createProductReview,
-} from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+} from '../actions/productActions';
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(1)
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
+  const [qty, setQty] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const productDetails = useSelector((state) => state.productDetails);
+  const { loading, error, product } = productDetails;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const productReviewCreate = useSelector((state) => state.productReviewCreate)
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
     success: successProductReview,
     loading: loadingProductReview,
     error: errorProductReview,
-  } = productReviewCreate
+  } = productReviewCreate;
 
   useEffect(() => {
     if (successProductReview) {
-      setRating(0)
-      setComment('')
+      setRating(0);
+      setComment('');
     }
     if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id))
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+      dispatch(listProductDetails(match.params.id));
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, successProductReview])
+  }, [dispatch, match, successProductReview]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
-  }
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
+
+  const addTosavedForLaterHandler = () => {
+    history.push(`/savedForLater/${match.params.id}?qty=${qty}`);
+  };
 
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch(
       createProductReview(match.params.id, {
         rating,
         comment,
       })
-    )
-  }
+    );
+  };
 
-  if (loading){
+  if (loading) {
     return (
       <>
         <Link className='btn btn-light my-3' to='/'>
           Go Back
         </Link>
         <Loader />
-      </>)
-  }
-  
-  else {
-      if (error){
-        return (
-          <>
-            <Link className='btn btn-light my-3' to='/'>
-              Go Back
-            </Link>
-            <Message variant='danger'>{error}</Message>
-          </>
-        )}
-      else {
-        return (
+      </>
+    );
+  } else {
+    if (error) {
+      return (
+        <>
+          <Link className='btn btn-light my-3' to='/'>
+            Go Back
+          </Link>
+          <Message variant='danger'>{error}</Message>
+        </>
+      );
+    } else {
+      return (
         <>
           <Link className='btn btn-light my-3' to='/'>
             Go Back
@@ -148,6 +159,19 @@ const ProductScreen = ({ history, match }) => {
                       </Row>
                     </ListGroup.Item>
                   )}
+                  <ListGroup.Item>
+                    <Button
+                      onClick={addTosavedForLaterHandler}
+                      className='btn-block btn-light'
+                      type='button'
+                      disabled={product.countInStock === 0}
+                    >
+                      <div className='d-flex justify-content-center align-items-center'>
+                        <i className='fas fa-heart mr-2'></i>
+                        Save For Later
+                      </div>
+                    </Button>
+                  </ListGroup.Item>
 
                   <ListGroup.Item>
                     <Button
@@ -230,9 +254,10 @@ const ProductScreen = ({ history, match }) => {
               </ListGroup>
             </Col>
           </Row>
-        </>)
-      }
+        </>
+      );
+    }
   }
-}
+};
 
-export default ProductScreen
+export default ProductScreen;
