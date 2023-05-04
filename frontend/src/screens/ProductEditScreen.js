@@ -90,22 +90,14 @@ const ProductEditScreen = ({ match, history }) => {
       })
     )
   }
-
-  return (
-    <>
-      <Link to='/admin/productlist' className='btn btn-light my-3'>
-        Go Back
-      </Link>
-      <FormContainer>
-        <h1>Edit Product</h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          <Form onSubmit={submitHandler}>
+//fixes issue 19 
+  const renderLoadingOrForm = () => {
+    if (loading) {
+      return <Loader />
+    } else if (error) {
+      return <Message variant='danger'>{error}</Message>
+    } else {
+      return (<Form onSubmit={submitHandler}>
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -187,7 +179,19 @@ const ProductEditScreen = ({ match, history }) => {
               Update
             </Button>
           </Form>
-        )}
+      )
+  }
+}
+  return (
+    <>
+      <Link to='/admin/productlist' className='btn btn-light my-3'>
+        Go Back
+      </Link>
+      <FormContainer>
+        <h1>Edit Product</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+        {renderLoadingOrForm()}
       </FormContainer>
     </>
   )

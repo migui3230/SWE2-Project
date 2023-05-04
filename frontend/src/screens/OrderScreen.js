@@ -85,11 +85,16 @@ const OrderScreen = ({ match, history }) => {
     dispatch(deliverOrder(order))
   }
 
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <Message variant='danger'>{error}</Message>
-  ) : (
+  const renderOrderContent = () => {
+    if (loading) {
+      return <Loader />;
+    }
+  
+    if (error) {
+      return <Message variant='danger'>{error}</Message>;
+    }
+
+    return (
     <>
       <h1>Order {order._id}</h1>
       <Row>
@@ -138,8 +143,8 @@ const OrderScreen = ({ match, history }) => {
                 <Message>Order is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {order.orderItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
+                  {order.orderItems.map((item) => (
+                    <ListGroup.Item key={item.product}>
                       <Row>
                         <Col md={1}>
                           <Image
@@ -228,7 +233,11 @@ const OrderScreen = ({ match, history }) => {
         </Col>
       </Row>
     </>
-  )
-}
+    );
+  };
 
+  
+
+return renderOrderContent();
+};
 export default OrderScreen

@@ -1,75 +1,40 @@
-import React from 'react'
+import React from 'react';
 
 const Rating = ({ value, text, color }) => {
+  const setClassName = (upperBound, lowerBound) => {
+    if (value >= upperBound) {
+      return 'fas fa-star';
+    } else if (value >= lowerBound) {
+      return 'fas fa-star-half-alt';
+    } else {
+      return 'far fa-star';
+    }
+  };
+
   return (
     <div className='rating'>
       <span>
-        <i
-          style={{ color }}
-          className={
-            value >= 1
-              ? 'fas fa-star'
-              : value >= 0.5
-              ? 'fas fa-star-half-alt'
-              : 'far fa-star'
-          }
-        ></i>
+        <i style={{ color }} className={setClassName(1, 0.5)}></i>
       </span>
       <span>
-        <i
-          style={{ color }}
-          className={
-            value >= 2
-              ? 'fas fa-star'
-              : value >= 1.5
-              ? 'fas fa-star-half-alt'
-              : 'far fa-star'
-          }
-        ></i>
+        <i style={{ color }} className={setClassName(2, 1.5)}></i>
       </span>
       <span>
-        <i
-          style={{ color }}
-          className={
-            value >= 3
-              ? 'fas fa-star'
-              : value >= 2.5
-              ? 'fas fa-star-half-alt'
-              : 'far fa-star'
-          }
-        ></i>
+        <i style={{ color }} className={setClassName(3, 2.5)}></i>
       </span>
       <span>
-        <i
-          style={{ color }}
-          className={
-            value >= 4
-              ? 'fas fa-star'
-              : value >= 3.5
-              ? 'fas fa-star-half-alt'
-              : 'far fa-star'
-          }
-        ></i>
+        <i style={{ color }} className={setClassName(4, 3.5)}></i>
       </span>
       <span>
-        <i
-          style={{ color }}
-          className={
-            value >= 5
-              ? 'fas fa-star'
-              : value >= 4.5
-              ? 'fas fa-star-half-alt'
-              : 'far fa-star'
-          }
-        ></i>
+        <i style={{ color }} className={setClassName(5, 4.5)}></i>
       </span>
-      <span>{text && text}</span>
+      {text ? <span>{text}</span> : null}
     </div>
-  )
-}
+  );
+};
 
 Rating.defaultProps = {
   color: '#f8e825',
-}
+};
 
-export default Rating
+export default Rating;
