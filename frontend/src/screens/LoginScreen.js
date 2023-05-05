@@ -62,9 +62,7 @@ const LoginScreen = ({ location, history }) => {
 
       <Row className='py-3'>
         <Col>
-          <Button variant='primary'>
-            <Link to='/Googlelogin'>Google Login</Link>
-          </Button>
+          <Link to='/Googlelogin'>Google Login</Link>
         </Col>
       </Row>
       <Row className='py-3'>
