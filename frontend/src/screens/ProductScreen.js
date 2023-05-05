@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappIcon, WhatsappShareButton } from 'react-share'
 import {
   Row,
   Col,
@@ -182,6 +183,20 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <TwitterShareButton
+                      url={window.location.href}     
+                      quote={`Check out ${product.name}`}
+                    >
+                      <TwitterIcon size={48}></TwitterIcon>
+                    </TwitterShareButton>
+                    <WhatsappShareButton
+                      url={window.location.href}
+                      quote={`Check out ${product.name}`}
+                    >
+                      <WhatsappIcon size={48}></WhatsappIcon>
+                    </WhatsappShareButton>
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
