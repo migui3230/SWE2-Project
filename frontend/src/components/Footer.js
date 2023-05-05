@@ -1,6 +1,6 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import {Link} from {}
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,13 +8,13 @@ const Footer = () => {
       <Container>
         <Row>
           <Col className='text-center py-3'>
-            <Link></Link>
+            <Link to='/contact'>Contact Us</Link>
           </Col>
           <Col className='text-center py-3'>Copyright &copy; ProShop</Col>
         </Row>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
